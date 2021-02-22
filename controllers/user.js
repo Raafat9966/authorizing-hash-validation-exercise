@@ -5,8 +5,8 @@ const login = async (req, res, next) => {
 	try {
 		let { name, password } = req.body;
 		let user = await db.loginUser(name, password);
-		let token = await jwt.sign({ user }, "secret");
-		res.cookie("authCookie", token, { maxAge: 10000 });
+		let token = jwt.sign({ user }, "secret");
+		res.cookie("authCookie", token, { maxAge: 1000000 });
 		res.status(200).send("done");
 	} catch (err) {
 		next(err);
